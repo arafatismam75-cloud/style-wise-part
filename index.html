@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Wise Part - Login</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+            background-color: #121316;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 24px;
+        }
+        .login-wrapper {
+            width: 100%;
+            max-width: 360px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .brand-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 48px;
+        }
+        .brand-logo {
+            width: 32px;
+            height: 32px;
+            fill: #4d8aea;
+        }
+        .brand-name {
+            font-size: 32px;
+            font-weight: 700;
+            color: #4d8aea;
+            letter-spacing: -0.5px;
+        }
+        form {
+            width: 100%;
+        }
+        .input-box {
+            position: relative;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+        .input-box input {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: 28px;
+            border: 1px solid #2a2b30;
+            background-color: transparent;
+            color: #ffffff;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .input-box input::placeholder {
+            color: #6b6c72;
+        }
+        .input-box input:focus {
+            border-color: #4d8aea;
+        }
+        .eye-icon {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            fill: #8e8f96;
+            cursor: pointer;
+        }
+        .terms-text {
+            font-size: 13px;
+            color: #9e9ea4;
+            margin-top: 24px;
+            margin-bottom: 24px;
+            line-height: 1.5;
+            text-align: left;
+        }
+        .terms-text a {
+            color: #ffffff;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+        .action-links {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+        .action-links button, .action-links a {
+            color: #4d8aea;
+            text-decoration: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 14px;
+            font-family: inherit;
+            padding: 0;
+        }
+        .action-links button:hover, .action-links a:hover {
+            text-decoration: underline;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 28px;
+            border: none;
+            background-color: #4d8aea;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 24px;
+            transition: background-color 0.2s;
+        }
+        .login-btn:hover {
+            background-color: #3b75d4;
+        }
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .oauth-links {
+            font-size: 14px;
+            color: #5b5c62;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .oauth-links button {
+            color: #ffffff;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 14px;
+            font-family: inherit;
+            padding: 0;
+        }
+        #message {
+            width: 100%;
+            min-height: 20px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 14px;
+            color: #ff6b6b;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-wrapper">
+        <!-- Brand -->
+        <div class="brand-header">
+            <svg class="brand-logo" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+            </svg>
+            <span class="brand-name">STYLE WISE PART</span>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm" onsubmit="return false;">
+            <div class="input-box">
+                <input type="email" id="email" placeholder="Email address" autocomplete="email" required>
+            </div>
+            <div class="input-box">
+                <input type="password" id="password" placeholder="Password" autocomplete="current-password" required>
+                <!-- Eye -->
+                <svg class="eye-icon" id="togglePassword" viewBox="0 0 24 24">
+                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12 c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                </svg>
+            </div>
+
+            <div class="terms-text">
+                By signing up or logging in, you consent to GMS Textiles's <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
+            </div>
+
+            <div id="message"></div>
+
+            <div class="action-links">
+                <button type="button" id="forgotPassword">Forgot password?</button>
+                <button type="button" id="signup">Sign up</button>
+            </div>
+
+            <button type="submit" class="login-btn" id="loginBtn"> Log in </button>
+        </form>
+
+        <!-- Google / Apple -->
+        <div class="oauth-links">
+            <button type="button" id="googleLogin">Log in with Google</button>
+            <span>|</span>
+            <button type="button" id="appleLogin">Login with Apple</button>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="login.js"></script>
+</body>
+</html>
