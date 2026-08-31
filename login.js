@@ -1,4 +1,19 @@
-import { auth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail } from './firebase.js';
+import { initializeApp } from "https://gstatic.com";
+import { 
+    getAuth, 
+    signInWithEmailAndPassword, 
+    GoogleAuthProvider, 
+    signInWithPopup,
+    sendPasswordResetEmail 
+} from "https://gstatic.com";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAsnyGvH1WbPhyv-19183jj5HRWfMqpitU",
+  authDomain: "://firebaseapp.com",
+  projectId: "style-wise-part-entry"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 const loginForm = document.getElementById('loginForm');
 const messageDiv = document.getElementById('message');
@@ -74,4 +89,4 @@ if (forgotPasswordBtn) {
     });
 }
 
-if (signupLink) { signupLink.addEventListener('click', (e) => { e.preventDefault(); window.location.href = "signup.html"; }); }
+if (signupLink) { signupLink.addEventListener('click', (e) => { e.preventDefault(); window.location.href = "singup.html"; }); }
