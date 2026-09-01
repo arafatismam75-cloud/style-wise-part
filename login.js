@@ -1,9 +1,5 @@
 // login.js
-import { 
-    auth, 
-    googleProvider 
-} from './firebase.js';
-
+import { auth, googleProvider } from './firebase.js';
 import {
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
@@ -54,10 +50,7 @@ loginBtn.addEventListener('click', async () => {
         const userCredential = await signInWithEmailAndPassword(auth, emailValue, passwordValue);
         showMessage('স্বাগতম! লগইন সফল!', false);
         console.log('Logged in user:', userCredential.user);
-        
-        // এখানে আপনার ড্যাশবোর্ড পেজে রিডাইরেক্ট করুন
         // window.location.href = 'dashboard.html';
-        
     } catch (error) {
         let errorMessage = '';
         switch (error.code) {
@@ -105,10 +98,121 @@ signupBtn.addEventListener('click', async () => {
         const userCredential = await createUserWithEmailAndPassword(auth, emailValue, passwordValue);
         showMessage('অ্যাকাউন্ট তৈরি সফল! এখন লগইন করুন', false);
         console.log('New user:', userCredential.user);
-        // ফর্ম ক্লিয়ার করুন
         email.value = '';
         password.value = '';
     } catch (error) {
+        let errorMessage = '';
+        switch (error.code) {
+            case 'auth/email-already-in-use':
+                errorMessage = 'এই ইমেইল আগেই ব্যবহার করা হয়েছে';
+                break;
+            case 'auth/invalid-email':
+                errorMessage = 'ইমেইল ঠিক নয়';
+                break;
+            case 'auth/weak-password':
+                errorMessage = 'পাসওয়ার্ড খুব সহজ, ৬ অক্ষর দিন';
+                break;
+            default:
+                errorMessage = error.message;
+        }
+        showMessage(errorMessage);
+    } finally {
+        signupBtn.disabled = false;
+        signupBtn.textContent = 'Sign up';
+    }
+});
+
+// ============ FORGOT PASSWORD ============
+forgotPassword.addEventListener('click', async () => {
+    const emailValue = email.value.trim();
+
+    if (!emailValue) {
+        showMessage('পাসওয়ার্ড রিসেট করতে আপনার ইমেইল দিন');
+        return;
+    }
+
+    forgotPassword.disabled = true;
+    forgotPassword.textContent = 'পাঠানো হচ্ছে...';
+
+    try {
+        await sendPasswordResetEmail(auth, emailValue);
+        showMessage('পাসওয়ার্ড রিসেট লিংক আপনার ইমেইলে পাঠানো হয়েছে!', false);
+    } catch (error) {
+        let errorMessage = '';
+        switch (error.code) {
+            case 'auth/user-not-found':
+                errorMessage = 'এই ইমেইলে কোনো অ্যাকাউন্ট নেই';
+                break;
+            case 'auth/invalid-email':
+                errorMessage = 'ইমেইল ঠিক নয়';
+                break;
+            default:
+                errorMessage = error.message;
+        }
+        showMessage(errorMessage);
+    } finally {
+        forgotPassword.disabled = false;
+        forgotPassword.textContent = 'Forgot password?';
+    }
+});
+
+// ============ GOOGLE LOGIN ============
+googleLogin.addEventListener('click', async () => {
+    googleLogin.disabled = true;
+    googleLogin.textContent = 'গুগলে লগইন...';
+
+    try {
+        const result = await signInWithPopup(auth, googleProvider);
+        showMessage(`স্বাগতম ${result.user.displayName || 'ইউজার'}!`, false);
+        console.log('Google user:', result.user);
+    } catch (error) {
+        let errorMessage = '';
+        switch (error.code) {
+            case 'auth/popup-closed-by-user':
+                errorMessage = 'পপআপ বন্ধ করে দিয়েছেন';
+                break;
+            case 'auth/cancelled-popup-request':
+                errorMessage = 'পপআপ বাতিল করা হয়েছে';
+                break;
+            default:
+                errorMessage = error.message;
+        }
+        showMessage(errorMessage);
+    } finally {
+        googleLogin.disabled = false;
+        googleLogin.textContent = 'Log in with Google';
+    }
+});
+
+// ============ APPLE LOGIN ============
+appleLogin.addEventListener('click', () => {
+    showMessage('Apple লগইন শুধুমাত্র iOS ডিভাইসে কাজ করে', false);
+});
+
+// ============ TOGGLE PASSWORD VISIBILITY ============
+let isPasswordVisible = false;
+togglePassword.addEventListener('click', function() {
+    isPasswordVisible = !isPasswordVisible;
+    password.type = isPasswordVisible ? 'text' : 'password';
+});
+
+// ============ CHECK AUTH STATE ============
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        console.log('User is logged in:', user.email);
+    } else {
+        console.log('No user is logged in');
+    }
+});
+
+// ============ ENTER KEY SUPPORT ============
+document.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        loginBtn.click();
+    }
+});
+
+console.log('🔥 Firebase Authentication ready!');    } catch (error) {
         let errorMessage = '';
         switch (error.code) {
             case 'auth/email-already-in-use':
