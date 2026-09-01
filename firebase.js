@@ -2,12 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { 
     getAuth, 
-    signInWithEmailAndPassword,
-    createUserWithEmailAndPassword,
-    sendPasswordResetEmail,
-    signInWithPopup,
-    GoogleAuthProvider,
-    onAuthStateChanged
+    GoogleAuthProvider 
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const firebaseConfig = {
@@ -22,5 +17,10 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const googleProvider = new GoogleAuthProvider();
+
+// Initialize Auth and Google Provider
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
+
+// Export them
+export { auth, googleProvider };
