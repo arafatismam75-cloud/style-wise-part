@@ -1,26 +1,40 @@
-// firebase.js
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+// Firebase SDK (CDN)
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js";
 import { 
     getAuth, 
-    GoogleAuthProvider 
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    signInWithEmailAndPassword, 
+    createUserWithEmailAndPassword,
+    updateProfile,
+    GoogleAuthProvider, 
+    signInWithPopup,
+    sendPasswordResetEmail,
+    signOut,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js";
 
+// ✅ আপনার আসল Firebase Config (আপনার দেওয়া তথ্য থেকে)
 const firebaseConfig = {
-    apiKey: "AIzaSyAsnyGvHlWbPhyVrI9I83Jj5HrWFMqpjtU",
-    authDomain: "style-wise-part-entry.firebaseapp.com",
-    projectId: "style-wise-part-entry",
-    storageBucket: "style-wise-part-entry.firebasestorage.app",
-    messagingSenderId: "728926671654",
-    appId: "1:728926671654:web:039c27229fd375b5bfe7e7",
-    measurementId: "G-LN31D39WK4"
+  apiKey: "AIzaSyXvYjUwBpVivzFJ3S3jJhq8WNoqjt",
+  authDomain: "style-wise-part-entry.firebaseapp.com",
+  projectId: "style-wise-part-entry",
+  storageBucket: "storage.googleapis.com",
+  messagingSenderId: "729726671654",
+  appId: "1:729726671654:web:83fc2729fcf3785bf7e7",
+  measurementId: "5-LkE103PWM4"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
 
-// Initialize Auth and Google Provider
-const auth = getAuth(app);
-const googleProvider = new GoogleAuthProvider();
-
-// Export them
-export { auth, googleProvider };
+// সব ফাংশন এক্সপোর্ট
+export { 
+    signInWithEmailAndPassword, 
+    createUserWithEmailAndPassword,
+    updateProfile,
+    GoogleAuthProvider, 
+    signInWithPopup, 
+    sendPasswordResetEmail,
+    signOut,
+    onAuthStateChanged
+};
