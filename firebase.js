@@ -5,14 +5,16 @@ import {
     signInWithEmailAndPassword, 
     createUserWithEmailAndPassword,
     updateProfile,
-    GoogleAuthProvider, 
     signInWithPopup,
     sendPasswordResetEmail,
     signOut,
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js";
 
-// ✅ আপনার আসল Firebase Config (আপনার দেওয়া তথ্য থেকে)
+// ✅ GoogleAuthProvider আলাদাভাবে import করুন (compat version-এ এভাবে হয়)
+import { GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js";
+
+// আপনার Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyXvYjUwBpVivzFJ3S3jJhq8WNoqjt",
   authDomain: "style-wise-part-entry.firebaseapp.com",
@@ -25,14 +27,15 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+const auth = getAuth(app);
 
 // সব ফাংশন এক্সপোর্ট
 export { 
+    auth,
     signInWithEmailAndPassword, 
     createUserWithEmailAndPassword,
     updateProfile,
-    GoogleAuthProvider, 
+    GoogleAuthProvider,
     signInWithPopup, 
     sendPasswordResetEmail,
     signOut,
